@@ -43,8 +43,8 @@ app.put('/api/products/:id', async (req, res) => {
   const {id} = req.params;
   const product = req.body;
 
-  if (mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send('No product with that id');
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({success: false, message: 'Invalid Product Id'});
    }
 
   try {
